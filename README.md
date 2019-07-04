@@ -102,7 +102,7 @@ python 脚本下载地址：
 
 
 ### 影响和修复
-默认情况下service远程管理没开启，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf/web.xml 里的AdminServlet，然后重启tomat.
+默认情况下service远程管理没开启，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf/web.xml 里的AdminServlet，然后重启tomcat.
 ```
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
