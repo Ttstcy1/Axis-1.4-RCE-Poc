@@ -88,7 +88,9 @@ Content-Length: 878
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/stap2.jpg)
 看我们ROOT目录下shell文件，虽然有些错误，但是不影响，因为是log模式，有追加内容
 ![avatar](https://kibodwapon.github.io/2019/07/04/is-1-4-远程命令执行POC/shell.jpg)
-#### 第三部执行shell.jsp
+#### 第三步
+执行shell.jsp
+
 浏览器访问 http://localhost:8080/shell.jsp?c=cmd%20/c%20ipconfig
 
 同样忽略网页报错
@@ -102,7 +104,7 @@ python 脚本下载地址：
 
 
 ### 影响和修复
-默认情况下service远程管理没开启，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf/web.xml 里的AdminServlet，然后重启tomcat.
+默认情况下service远程管理没开启，也即配置文件中enableRemoteAdmim为false，也就是只能本地localhost访问，这种情况下可以结合ssrf和xxe进行利用，所以比较鸡肋，但是安全无小事，对于命令执行漏洞还是应该重视。修复的话，关闭admin服务即可，具体方法注释掉web-inf/web.xml 里的AdminServlet，然后重启tomcat.
 ```
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
